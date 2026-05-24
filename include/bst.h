@@ -41,4 +41,10 @@ bool bst_delete(Bst *tree, int id);
 // 전체 노드 메모리 해제 및 루트 초기화
 void bst_free(Bst *tree);
 
+// 중위 순회 콜백(학번 오름차순)
+typedef void (*BstVisitor)(const Student *student, void *user_data);
+
+// BST 중위 순회
+void bst_inorder(const Bst *tree, BstVisitor visitor, void *user_data);
+
 #endif

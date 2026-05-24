@@ -191,3 +191,22 @@ void bst_free(Bst *tree)
     bst_free_rec(tree->root);
     tree->root = NULL;
 }
+
+// 중위 순회 재귀
+static void bst_inorder_rec(BstNode *root, BstVisitor visitor, void *user_data)
+{
+    if (root == NULL || visitor == NULL) {
+        return;
+    }
+    bst_inorder_rec(root->left, visitor, user_data);
+    visitor(&root->data, user_data);
+    bst_inorder_rec(root->right, visitor, user_data);
+}
+
+void bst_inorder(const Bst *tree, BstVisitor visitor, void *user_data)
+{
+    if (tree == NULL || visitor == NULL) {
+        return;
+    }
+    bst_inorder_rec(tree->root, visitor, user_data);
+}
